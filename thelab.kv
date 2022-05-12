@@ -1,0 +1,959 @@
+#:import Factory kivy.factory.Factory
+
+ScreenNav:
+
+<ContentNavigationDrawer>:
+    ScrollView:
+        MDList:
+            MDRectangleFlatIconButton:
+                size_hint: 1, None
+                height: "80dp"
+                icon: "magnify"
+                text: "Input"
+                theme_text_color: "Custom"
+                font_name: app.fontse
+                font_size: "20sp"
+                text_color: 1, 1, 1, 1
+                line_color: 0.15, 0.15, 0.15, 0
+                icon_color: 1, 1, 1, 1
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "input"
+            MDRectangleFlatIconButton:
+                size_hint: 1, None
+                height: "80dp"
+                icon: "keyboard-return"
+                font_name: app.fontse
+                font_size: "20sp"
+                text: "Output"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                line_color: 0.15, 0.15, 0.15, 0
+                icon_color: 1, 1, 1, 1
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "output"
+            MDRectangleFlatIconButton:
+                size_hint: 1, None
+                height: "80dp"
+                icon: "file"
+                font_name: app.fontse
+                font_size: "20sp"
+                text: "Saved Items"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                line_color: 0.15, 0.15, 0.15, 0
+                icon_color: 1, 1, 1, 1
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "localstorage"
+            MDRectangleFlatIconButton:
+                size_hint: 1, None
+                height: "80dp"
+                icon: "cog-outline"
+                font_name: app.fontse
+                font_size: "20sp"
+                text: "Settings"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                line_color: 0.15, 0.15, 0.15, 0
+                icon_color: 1, 1, 1, 1
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "settings"
+            MDRectangleFlatIconButton:
+                size_hint: 1, None
+                height: "80dp"
+                icon: "image-filter-drama"
+                font_name: app.fontse
+                font_size: "20sp"
+                text: "Update Item List"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                line_color: 0.15, 0.15, 0.15, 0
+                icon_color: 1, 1, 1, 1
+                on_press: 
+                    root.nav_drawer.set_state("close")
+                    root.shisha()
+<ScreenNav>:
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top": 1}
+            md_bg_color: 0.1, 0.1, 0.2, 1
+            font_name: app.fontse
+            elevation: 10
+            title: "WynnOptimizer"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+        MDNavigationLayout:
+            x: toolbar.height
+            ScreenManager:
+                id:screen_manager
+                BoxLayoutExample:
+                    screen_manager: screen_manager
+                    name: "input"
+                OutputScreen:
+                    screen_manager: screen_manager
+                    name: "output"
+                SavedItemsScreen:
+                    screen_manager: screen_manager
+                    name: "localstorage"
+                SettingsScreen:
+                    screen_manager: screen_manager
+                    name: "settings"
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer
+<SavedItemsScreen>:
+    savedite: bbaa
+    savebute: ddee
+    leftrow: lefterow
+    rightrow: righterow
+    ScrollView:
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: self.minimum_height
+            Spinner:
+                id:bbaa
+                size_hint: 1, None
+                height: "50dp"
+                font_name: app.fontbi
+                font_size: "25sp"
+                text: "Saved Items"
+                values: ("Saved Items")
+                on_press: root.printrow()
+                on_text: root.changeyourkief(*args)
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                option_cls: Factory.get("MySpinnerForItemSpinner")
+            Label:
+                id: ddee
+                font_name: app.fontbi
+                font_size: "25sp"
+                size_hint: 1, None
+                height: "320dp"
+                text: "Choose an Item"
+            BoxLayout:
+                size_hint: 1, None
+                height: "200dp"
+                orientation:"horizontal"
+                Label:
+                    id: lefterow
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: 1, None
+                    height: "200dp"
+                    text: "Choose an Item"
+                Label:
+                    id: righterow
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: 1, None
+                    height: "200dp"
+                    text: "Choose an Item"
+            Button:
+                size_hint: 1, None
+                height: "50dp"
+                font_name: app.fontbi
+                font_size: "25sp"
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                text: "I want to delete this Item"
+                on_press: root.delete_item()
+<SettingsScreen>:
+    ScrollView:
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: self.minimum_height
+            Label:
+                size_hint: 1, None
+                height: "50dp"
+                markup: True 
+                font_size: "30sp"
+                font_name: app.fontbi
+                text: "[b]Settings[/b]"
+            MDSlider:
+                size_hint: 1, None
+                height: "50dp"
+                min: 0
+                max: 1
+                value: 0.5
+                hint: False
+                value_track: True
+                value_track_color: app.lamba, app.lamba, app.lamba, 1
+                on_value: app.changetheme(*args)
+                orientation: "horizontal"
+            #this is a test button for various tests i need to do
+            #Button:
+                #size_hint: 1, None
+                #height: "50dp"
+                #text: "mooi"
+                #on_press: app.call_api()
+<OutputScreen>:
+    ithinkso: anitemcomeshere
+    idonot: twoitemcomeshere
+    idonte: threeitemcomeshere
+    kokokei: keekek
+    reesaa: shueeedde
+    ScrollView:
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: self.minimum_height
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "50dp"
+                Label:
+                    size_hint: None, 1
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    width: "180dp"
+                    text: "Progress:"
+                ProgressBar:
+                    size_hint: 1, None
+                    height: "50dp"
+                    max:100
+                    value: app.myvalue
+                Label:
+                    size_hint: None, 1
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    width: "100dp"
+                    text: str(app.myvalue) + "%"
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "50dp"
+                Label:
+                    size_hint: None, 1
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    width: "180dp"
+                    text: "Number of Items:"
+                ProgressBar:
+                    size_hint: 1, None
+                    height: "50dp"
+                    max:1000
+                    value: app.amountlive
+                Label:
+                    size_hint: None, 1
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    height: "100dp"
+                    text: app.amountlivestr
+            BoxLayout:
+                size_hint: 1, None
+                height: "50dp"
+                orientation:"horizontal"
+                Spinner:
+                    id:keekek
+                    size_hint: 1, None
+                    height: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "Items we found"
+                    values: ("Items we found")
+                    on_press: root.printjiw()
+                    on_text: root.changeyourlife(*args)
+                    background_color: app.lamba, app.lamba, app.lamba, 1
+                    option_cls: Factory.get("MySpinnerForItemSpinner")
+                Spinner:
+                    id:shueeedde
+                    size_hint: None, None
+                    height: "50dp"
+                    width: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text:"1"
+                    values: ("Items we found")
+                    on_press: root.thousanddivider()
+                    on_text: root.changethousand(*args)
+                    background_color: app.lamba, app.lamba, app.lamba, 1
+                    option_cls: Factory.get("MySpinnerBubu")
+            Label:
+                id: anitemcomeshere
+                font_name: app.fontbi
+                font_size: "25sp"
+                size_hint: 1, None
+                height: "320dp"
+                text: "Choose an Item"
+            BoxLayout:
+                size_hint: 1, None
+                height: "200dp"
+                orientation:"horizontal"
+                Label:
+                    id: twoitemcomeshere
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: 1, None
+                    height: "200dp"
+                    text: "Choose an Item"
+                Label:
+                    id: threeitemcomeshere
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: 1, None
+                    height: "200dp"
+                    text: "Choose an Item"
+            Button: 
+                size_hint: 1, None
+                height: "50dp"
+                font_name: app.fontbi
+                font_size: "25sp"
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                text: "Save Item"
+                on_press: root.save_item()
+<MySpinnerBubu@SpinnerOption>:
+    font_name: app.fontbi
+    font_size: "25sp"
+    background_color: app.lamba, app.lamba, app.lamba, 1
+<MySpinnerForItemSpinner@SpinnerOption>:
+    font_name: app.fontbi
+    font_size: "15sp"
+    background_color: app.lamba, app.lamba, app.lamba, 1
+<BoxLayoutExample>:
+    tes: teees
+    bes: beees
+    yore:yorree
+    ScrollView:
+        BoxLayout:
+            #md_bg_color: 0, 0, 0, 1
+            #radius: []
+            size_hint: 1, None
+            height: self.minimum_height
+            orientation: "vertical"
+            LvlBox:
+                size_hint: 1, None
+                height: "50dp"
+            DuraBox:
+                size_hint: 1, None
+                height: "50dp"
+            StrBox:
+                size_hint: 1, None
+                height: "50dp"
+            DexBox:
+                size_hint: 1, None
+                height: "50dp"
+            IntBox:
+                size_hint: 1, None
+                height: "50dp"
+            DefBox:
+                size_hint: 1, None
+                height: "50dp"
+            AgiBox:
+                size_hint: 1, None
+                height: "50dp"
+            Spinner:
+                size_hint: 1, None
+                height: "50dp"
+                text: "What Item do you want to make?"
+                font_name: app.fontbi
+                font_size: "25sp"
+                values: ("What Item do you want to make?", "Helmet", "Chestplate", "Boots", "Leggings", "Ring", "Bracelet", "Necklace", "Spear", "Dagger", "Relik", "Bow", "Wand", "Food", "Potion", "Scroll")
+                on_text: root.changeingr(*args)
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                option_cls: Factory.get("MySpinnerBubu")
+            Spinner:
+                size_hint: 1, None
+                height: "50dp"
+                font_name: app.fontbi
+                font_size: "25sp"
+                text: "What Identification do you want to optimize for?"
+                values: ("What Identification do you want to optimize for?", "Airdefense", "Earthdefense", "Firedefense", "Thunderdefense", "Waterdefense", "Damagebonus", "Damagebonusraw", "Airdamagebonus", "Earthdamagebonus", "Firedamagebonus", "Thunderdamagebonus", "Waterdamagebonus", "Agilitypoints", "Defensepoints", "Dexteritypoints", "Intelligencepoints", "Strengthpoints", "Poison", "Manasteal", "Manaregen", "Speed", "Healthbonus", "Spelldamage", "Spelldamageraw", "Attackspeed", "Lifesteal", "Healthregen", "Healthregenraw", "Reflection", "Thorns", "Exploding", "Lootbonus", "Xpbonus", "Emeraldstealing", "Soulpoints", "Gather_xp_bonus", "Loot_quality")
+                on_text: root.justdoit(*args)
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                option_cls: Factory.get("MySpinnerBubu")
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "50dp"
+                Label:
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "What is the lowest max stat you want:"
+                MDSlider:
+                    id: kraslider
+                    min: 0
+                    max: 35
+                    value: 0
+                    hint: False
+                    on_value: root.lirroo(*args)
+                    orientation: "horizontal"
+                    value_track: True
+                    value_track_color: app.lamba, app.lamba, app.lamba, 1
+                TextInput:
+                    id: yorree
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: None, 1
+                    width: "80dp"
+                    halign: "center"
+                    padding_y: ["15dp", "0dp"]
+                    foreground_color:1,1,1,1
+                    background_color:0,0,0,0
+                    multiline: False
+                    text: str(int(kraslider.value))
+                    on_text_validate: root.callmynametxt(*args)
+            BoxLayout:
+                size_hint: 1, None
+                height: "50dp"
+                orientation: "horizontal"
+                Label:
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "Minimum chance to get max roll?"
+                MDSlider:
+                    id: chaslider
+                    min: 0
+                    max: 100
+                    value: 0
+                    orientation: "horizontal"
+                    value_track: True
+                    value_track_color: app.lamba, app.lamba, app.lamba, 1
+                Label:
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: None, 1
+                    width: "80dp"
+                    text: str(int(chaslider.value)) + "%"
+                    on_text: app.adddcha(int(chaslider.value))
+            SecondSpinner:
+                size_hint: 1, None
+                height: "100dp"
+            FirstSpinnerCheck:
+                size_hint: 1, None
+                height: "100dp"
+            SecondSpinnerCheck:
+                size_hint: 1, None
+                height: "100dp"
+            BoxLayout:
+                size_hint: 1, None
+                height: "200dp"
+                orientation: "vertical"
+                Label:
+                    id: teees
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    size_hint: 1, None
+                    height: "50dp"
+                    text: "Choose what you want to craft first:"
+                BoxLayout:
+                    size_hint: 1, None
+                    height: "50dp"
+                    orientation: "horizontal"
+                    ToggleButton:
+                        text: "1"
+                        group: "lost"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.rarityonechanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+                    ToggleButton:
+                        text: "2"
+                        group: "lost"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.rarityonechanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+                    ToggleButton:
+                        text: "3"
+                        group: "lost"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.rarityonechanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+                Label:
+                    id: beees
+                    size_hint: 1, None
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    height: "50dp"
+                    text: "Choose what you want to craft first:"
+                BoxLayout:
+                    size_hint: 1, None
+                    height: "50dp"
+                    orientation: "horizontal"
+                    ToggleButton:
+                        text: "1"
+                        group: "lost_very"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.raritytwochanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+                    ToggleButton:
+                        text: "2"
+                        group: "lost_very"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.raritytwochanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+                    ToggleButton:
+                        text: "3"
+                        group: "lost_very"
+                        font_name: app.fontbi
+                        font_size: "25sp"
+                        on_press: root.raritytwochanger(self.text)
+                        background_color: app.lamba, app.lamba, app.lamba, 1
+            Label:
+                size_hint: 1, None
+                height: "50dp"
+                font_name: app.fontbi
+                font_size: "25sp"
+                text: "Additional Ingredient modifier checks:"
+            BoxLayout:
+                size_hint: 1, None
+                height: "50dp"
+                orientation: "horizontal"
+                Label:
+                    size_hint: 1, None
+                    height: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "Dura mod check:"
+                CheckBox:
+                    size_hint: None, 1
+                    width: "40dp"
+                    on_active: root.durabmod(*args)
+                Label:
+                    size_hint: 1, None
+                    height: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "Skill req check:"
+                CheckBox:
+                    size_hint: None, 1
+                    width: "40dp"
+                    on_active: root.skillmod(*args)
+                Label:
+                    size_hint: 1, None
+                    height: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    disabled: eeew.active
+                    text: "Negative check:"
+                CheckBox:
+                    size_hint: None, 1
+                    width: "40dp"
+                    disabled: eeew.active
+                    on_active: root.negatmod(*args)
+                Label:
+                    size_hint: 1, None
+                    height: "50dp"
+                    font_name: app.fontbi
+                    font_size: "25sp"
+                    text: "Only flipped"
+                CheckBox:
+                    id: eeew
+                    size_hint: None, 1
+                    width: "40dp"
+                    on_active: root.flippedmod(*args)
+            MDRectangleFlatButton:
+                size_hint: 1, None
+                theme_text_color: "Custom"
+                text_color: 1, 0, 0, 1
+                line_color: 1, 0, 0, 1
+                height: "50dp"
+                text: "Optimize!"
+                font_name: app.fontbi
+                font_size: "25sp"
+                background_color: app.lamba, app.lamba, app.lamba, 1
+                on_press: 
+                    root.screen_manager.transition.direction = "left"
+                    root.screen_manager.current = "output"
+                    app.calculate()
+<SecondSpinner>:
+    expo: keexpo
+    size_hint: 1, None
+    height: "100dp"
+    orientation: "vertical"
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Switch:
+            id: my_switch
+            size_hint: None, None
+            width: "100dp"
+            height: "50dp"
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            on_active: root.sec_optim_bool(*args)
+        Spinner:
+            disabled: not my_switch.active
+            size_hint: 1, None
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            text: "What Identification do you want to optimize for as well?"
+            values: ("What Identification do you want to optimize foras well?", "Airdefense", "Earthdefense", "Firedefense", "Thunderdefense", "Waterdefense", "Damagebonus", "Damagebonusraw", "Airdamagebonus", "Earthdamagebonus", "Firedamagebonus", "Thunderdamagebonus", "Waterdamagebonus", "Agilitypoints", "Defensepoints", "Dexteritypoints", "Intelligencepoints", "Strengthpoints", "Poison", "Manasteal", "Manaregen", "Speed", "Healthbonus", "Spelldamage", "Spelldamageraw", "Attackspeed", "Lifesteal", "Healthregen", "Healthregenraw", "Reflection", "Thorns", "Exploding", "Lootbonus", "Xpbonus", "Emeraldstealing", "Soulpoints", "Gather_xp_bonus", "Loot_quality")
+            on_text: root.secopdili(*args)
+            option_cls: Factory.get("MySpinnerBubu")
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Label:
+            size_hint: 1, None
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            disabled: not my_switch.active
+            text: "What is the lowest max stat you want:"
+        BoxLayout:
+            disabled: not my_switch.active
+            MDSlider:
+                min: -1
+                max: 13
+                value: -1
+                hint: False
+                orientation: "horizontal"
+                on_value: root.powerforathing(*args)
+                value_track: True
+                value_track_color: app.lamba, app.lamba, app.lamba, 1
+            TextInput:
+                id: keexpo
+                size_hint: None, 1
+                font_name: app.fontbi
+                font_size: "25sp"
+                width: "80dp"
+                halign: "center"
+                padding_y: ["15dp", "0dp"]
+                foreground_color:1,1,1,1
+                background_color:0,0,0,0
+                multiline: False
+                text: "0"
+                on_text_validate: root.powerforabingtxt(*args)
+<FirstSpinnerCheck>:
+    rego: kerego
+    size_hint: 1, None
+    height: "100dp"
+    orientation: "vertical"
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Switch:
+            id: my_switch
+            size_hint: None, None
+            width: "100dp"
+            height: "50dp"
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            on_active: root.fir_check_bool(*args)
+        Spinner:
+            disabled: not my_switch.active
+            size_hint: 1, None
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            text: "Check for unwanted ID #1"
+            on_text: root.firchdili(*args)
+            values: ("Check for unwanted ID #1", "Airdefense", "Earthdefense", "Firedefense", "Thunderdefense", "Waterdefense", "Damagebonus", "Damagebonusraw", "Airdamagebonus", "Earthdamagebonus", "Firedamagebonus", "Thunderdamagebonus", "Waterdamagebonus", "Agilitypoints", "Defensepoints", "Dexteritypoints", "Intelligencepoints", "Strengthpoints", "Poison", "Manasteal", "Manaregen", "Speed", "Healthbonus", "Spelldamage", "Spelldamageraw", "Attackspeed", "Lifesteal", "Healthregen", "Healthregenraw", "Reflection", "Thorns", "Exploding", "Lootbonus", "Xpbonus", "Emeraldstealing", "Soulpoints", "Gather xp bonus", "Loot quality")
+            option_cls: Factory.get("MySpinnerBubu")
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Label:
+            size_hint: 1, None
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            disabled: not my_switch.active
+            text: "Lowest acceptable stat for that ID"
+        BoxLayout:
+            disabled: not my_switch.active
+            MDSlider:
+                min: -1
+                max: 13
+                value: -1
+                hint: False
+                orientation: "horizontal"
+                on_value: root.powerfortwothing(*args)
+                value_track: True
+                value_track_color: app.lamba, app.lamba, app.lamba, 1
+            TextInput:
+                id: kerego
+                size_hint: None, 1
+                font_name: app.fontbi
+                font_size: "25sp"
+                width: "80dp"
+                halign: "center"
+                padding_y: ["15dp", "0dp"]
+                foreground_color:1,1,1,1
+                background_color:0,0,0,0
+                multiline: False
+                text: "0"
+                on_text_validate: root.powerfortwobingtxt(*args)
+<SecondSpinnerCheck>:
+    bergo: kebergo
+    size_hint: 1, None
+    height: "100dp"
+    orientation: "vertical"
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Switch:
+            id: my_switch
+            size_hint: None, None
+            width: "100dp"
+            height: "50dp"
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            on_active: root.sec_check_bool(*args)
+        Spinner:
+            disabled: not my_switch.active
+            size_hint: 1, None
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            background_color: app.lamba, app.lamba, app.lamba, 1
+            text: "Check for unwanted ID #2"
+            on_text: root.secchdili(*args)
+            values: ("Check for unwanted ID #2", "Airdefense", "Earthdefense", "Firedefense", "Thunderdefense", "Waterdefense", "Damagebonus", "Damagebonusraw", "Airdamagebonus", "Earthdamagebonus", "Firedamagebonus", "Thunderdamagebonus", "Waterdamagebonus", "Agilitypoints", "Defensepoints", "Dexteritypoints", "Intelligencepoints", "Strengthpoints", "Poison", "Manasteal", "Manaregen", "Speed", "Healthbonus", "Spelldamage", "Spelldamageraw", "Attackspeed", "Lifesteal", "Healthregen", "Healthregenraw", "Reflection", "Thorns", "Exploding", "Lootbonus", "Xpbonus", "Emeraldstealing", "Soulpoints", "Gather xp bonus", "Loot quality")
+            option_cls: Factory.get("MySpinnerBubu")
+    BoxLayout:
+        size_hint: 1, None
+        height: "50dp"
+        orientation: "horizontal"
+        Label:
+            size_hint: 1, None
+            height: "50dp"
+            font_name: app.fontbi
+            font_size: "25sp"
+            disabled: not my_switch.active
+            text: "Lowest acceptable stat for that ID"
+        BoxLayout:
+            disabled: not my_switch.active
+            MDSlider:
+                min: -1
+                max: 13
+                value: -1
+                hint: False
+                orientation: "horizontal"
+                on_value: root.powerforthreething(*args)
+                value_track: True
+                value_track_color: app.lamba, app.lamba, app.lamba, 1
+            TextInput:
+                id: kebergo
+                size_hint: None, 1
+                font_name: app.fontbi
+                font_size: "25sp"
+                width: "80dp"
+                halign: "center"
+                padding_y: ["15dp", "0dp"]
+                foreground_color:1,1,1,1
+                background_color:0,0,0,0
+                multiline: False
+                text: "0"
+                on_text_validate: root.powerforthreebingtxt(*args)
+<LvlBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "What level are you:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    Spinner:
+        size_hint: 1, None
+        background_color: app.lamba, app.lamba, app.lamba, 1
+        height: "50dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        text: "My Level"
+        on_text: app.adddlvl(*args)
+        values: ("My Level", '1-3', '3-5', '5-7', '7-9', '10-13', '13-15', '15-17', '17-19', '20-23', '23-25', '25-27', '27-29', '30-33', '33-35', '35-37', '37-39', '40-43', '43-45', '45-47', '47-49', '50-53', '53-55', '55-57', '57-59', '60-63', '63-65', '65-67', '67-69', '70-73', '73-75', '75-77', '77-79', '80-83', '83-85', '85-87', '87-89', '90-93', '93-95', '95-97', '97-99', '100-103', '103-105')
+        option_cls: Factory.get("MySpinnerBubu")
+    #MDSlider:
+        #id: lvlslider
+        #min: 1
+        #max: 106
+        #value: 1
+        #hint: False
+        #orientation: "horizontal"
+        #value_track: True
+        #value_track_color: app.lamba, app.lamba, app.lamba, 1
+        #on_value: app.adddlvl(*args)
+    #TextInput:
+        #size_hint: None, 1
+        #width: "80dp"
+        #font_name: app.fontbi
+        #font_size: "25sp"
+        #halign: "center"
+        #padding_y: ["15dp", "0dp"]
+        #foreground_color:1,1,1,1
+        #background_color:0,0,0,0
+        #multiline: False
+        #on_text_validate: app.adddlvltxt(*args)
+        #text: str(int(lvlslider.value))
+<DuraBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Minmum durability:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: duraslider
+        min: 1
+        max: 1000
+        value: 1
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.addddura(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(duraslider.value))
+        on_text_validate: app.adddduratxt(*args)
+<StrBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Maximum strength requirement:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: strslider
+        min: 0
+        max: 1000
+        value: 0
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.adddstr(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(strslider.value))
+        on_text_validate: app.adddstrtxt(*args)
+<DexBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Maximum dexterity requirement:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: dexslider
+        min: 0
+        max: 1000
+        value: 0
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.addddex(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(dexslider.value))
+        on_text_validate: app.addddextxt(*args)
+<IntBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Maximum intelligence requirement:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: intslider
+        min: 0
+        max: 1000
+        value: 0
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.adddint(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(intslider.value))
+        on_text_validate: app.adddinttxt(*args)
+<DefBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Maximum defence requirement:"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: defslider
+        min: 0
+        max: 1000
+        value: 0
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.addddef(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(defslider.value))
+        on_text_validate: app.addddeftxt(*args)
+<AgiBox@BoxLayout>:
+    orientation: "horizontal"
+    Label:
+        text: "Maximum agility requirement"
+        font_name: app.fontbi
+        font_size: "25sp"
+    MDSlider:
+        id: agislider
+        min: 0
+        max: 1000
+        value: 0
+        hint: False
+        orientation: "horizontal"
+        value_track: True
+        value_track_color: app.lamba, app.lamba, app.lamba, 1
+        on_value: app.adddagi(*args)
+    TextInput:
+        size_hint: None, 1
+        width: "80dp"
+        font_name: app.fontbi
+        font_size: "25sp"
+        halign: "center"
+        padding_y: ["15dp", "0dp"]
+        foreground_color:1,1,1,1
+        background_color:0,0,0,0
+        multiline: False
+        text: str(int(agislider.value))
+        on_text_validate: app.adddagitxt(*args)
