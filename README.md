@@ -1,0 +1,2 @@
+# WynncraftOptimizer
+WynncraftOptimizer
