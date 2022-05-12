@@ -5,6 +5,7 @@ will need to download python, i used python 3.9
 will need to download kivy and kivymd here are the links:
 https://kivy.org/#home
 https://kivymd.readthedocs.io/en/0.104.1/index.html
+I used VisualStudioCode
 
 not sure if you will nead to import threading, but might need to look into that.
 
